@@ -21,6 +21,10 @@ def get_predict():
     parameters["feeling_temperature_C"] = float(parameters["feeling_temperature_C"])
     parameters["humidity"] = float(parameters["humidity"])
     parameters["windspeed"] = float(parameters["windspeed"])
-
-    result = predict(parameters)
+    if "model" in parameters:
+        model=str(parameters["model"])
+        del parameters["model"]
+    else:
+        model = "xgboost"
+    result = predict(parameters,model=model)
     return {"result": result}
