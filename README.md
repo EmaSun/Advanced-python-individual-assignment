@@ -1,11 +1,11 @@
-## Instruction for web application
+# Instruction for web application
 
-##Overview
+## Overview
 The app.py file contains a simplified application that can be run standalone:
 ```
 $ flask run
 ```
-##Usage
+## Usage
 1.If you want to check home page, go to the link below:
 http://127.0.0.1:5000/
 
