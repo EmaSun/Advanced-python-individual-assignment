@@ -5,15 +5,17 @@ from sklearn import datasets
 from sklearn.ensemble import RandomForestClassifier
 import joblib
 
+
 def read_split():
     iris = datasets.load_iris()
-    df_x=pd.DataFrame(iris.data)
-    df_y=pd.DataFrame(iris.target)
-    return df_x,df_y
+    df_x = pd.DataFrame(iris.data)
+    df_y = pd.DataFrame(iris.target)
+    return df_x, df_y
 
-def train_rf(df_x,df_y):
-    rfc=RandomForestClassifier(n_estimators=150,bootstrap=True,random_state=26)
-    model=rfc.fit(df_x,df_y)
+
+def train_rf(df_x, df_y):
+    rfc = RandomForestClassifier(n_estimators=150, bootstrap=True, random_state=26)
+    model = rfc.fit(df_x, df_y)
     return model
 
 
@@ -23,11 +25,13 @@ def get_model_path(model_dir=None):
     model_path = os.path.join(model_dir, "rf.pkl")
     return model_path
 
+
 def train_and_persist(model_dir=None):
-    df_x,df_y=read_split()
-    model_result = train_rf(df_x,df_y)
+    df_x, df_y = read_split()
+    model_result = train_rf(df_x, df_y)
     model_path = get_model_path(model_dir)
     joblib.dump(model_result, model_path)
+
 
 def predict(parameters, model_dir=None):
     """Returns model prediction.

@@ -1,10 +1,11 @@
 import datetime as dt
 from flask import Flask, request
 import time
+import os
 import pandas as pd
 
-from ie_bike_model.model import predict
-from ie_bike_model.util import read_data
+from ie_bike_model.model import predict,train_and_persist
+from ie_bike_model.util import read_data,get_model_path
 
 app = Flask(__name__)
 
@@ -46,3 +47,10 @@ def get_predict():
     result = predict(parameters, model=model)
     time_elapsed = time.clock() - time_start
     return {"result": result, "computation time": time_elapsed}
+
+
+@app.route("/score")
+def get_score(model="xgboost"):
+    score =train_and_persist(model=model)
+    
+    return {"train_score": score}
