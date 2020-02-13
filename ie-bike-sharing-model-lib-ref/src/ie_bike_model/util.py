@@ -18,8 +18,8 @@ def get_data_directory():
     return data_dir
 
 
-def get_model_path(model="model",model_dir=None):
-    pkl=str(model)+".pkl"
+def get_model_path(model="xgboost", model_dir=None):
+    pkl = str(model) + ".pkl"
     if model_dir is None:
         model_dir = os.path.dirname(__file__)
 

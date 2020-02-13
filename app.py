@@ -21,17 +21,17 @@ def get_predict():
     parameters = dict(request.args)
     hour_original = read_data()
     if "date" not in parameters:
-        parameters["date"]="2012-01-01T18:00:00"
+        parameters["date"] = "2012-01-01T18:00:00"
     if "weathersit" not in parameters:
-        parameters["weathersit"]=hour_original["weathersit"].median()
+        parameters["weathersit"] = hour_original["weathersit"].median()
     if "temperature_C" not in parameters:
-        parameters["temperature_C"]=41.0*hour_original["temp"].mean()
+        parameters["temperature_C"] = 41.0 * hour_original["temp"].mean()
     if "feeling_temperature_C" not in parameters:
-        parameters["feeling_temperature_C"]=50.0*hour_original["atemp"].mean()
+        parameters["feeling_temperature_C"] = 50.0 * hour_original["atemp"].mean()
     if "humidity" not in parameters:
-        parameters["humidity"]=100.0*hour_original["hum"].mean()
+        parameters["humidity"] = 100.0 * hour_original["hum"].mean()
     if "windspeed" not in parameters:
-        parameters["windspeed"]=67.0*hour_original["windspeed"].mean()
+        parameters["windspeed"] = 67.0 * hour_original["windspeed"].mean()
     parameters["date"] = dt.datetime.fromisoformat(parameters["date"])
     parameters["weathersit"] = int(parameters["weathersit"])
     parameters["temperature_C"] = float(parameters["temperature_C"])
@@ -39,11 +39,10 @@ def get_predict():
     parameters["humidity"] = float(parameters["humidity"])
     parameters["windspeed"] = float(parameters["windspeed"])
     if "model" in parameters:
-        model=str(parameters["model"])
+        model = str(parameters["model"])
         del parameters["model"]
     else:
         model = "xgboost"
-    result = predict(parameters,model=model)
-    time_elapsed = (time.clock() - time_start)
-    return {"result": result,"computation time":time_elapsed}
-
+    result = predict(parameters, model=model)
+    time_elapsed = time.clock() - time_start
+    return {"result": result, "computation time": time_elapsed}

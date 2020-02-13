@@ -1,0 +1,9 @@
+[build-system]
+requires = ["flit_core >=2,<3"]
+build-backend = "flit_core.buildapi"
+
+[tool.flit.metadata]
+module = "ie_rf_iris"
+author = "ema sun"
+author-email = "ema.sun@student.ie.edu"
+
