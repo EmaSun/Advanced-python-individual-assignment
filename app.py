@@ -4,8 +4,8 @@ import time
 import os
 import pandas as pd
 
-from ie_bike_model.model import predict,train_and_persist
-from ie_bike_model.util import read_data,get_model_path
+from ie_bike_model.model import predict, train_and_persist
+from ie_bike_model.util import read_data, get_model_path
 
 app = Flask(__name__)
 
@@ -51,6 +51,6 @@ def get_predict():
 
 @app.route("/score")
 def get_score(model="xgboost"):
-    score =train_and_persist(model=model)
-    
+    score = train_and_persist(model=model)
+
     return {"train_score": score}

@@ -162,8 +162,8 @@ def train_xgboost(hour):
     )
 
     xgb.fit(hour_d_train_x, hour_d_train_y)
-    score=xgb.score(hour_d_train_x, hour_d_train_y)
-    return xgb,score
+    score = xgb.score(hour_d_train_x, hour_d_train_y)
+    return xgb, score
 
 
 def train_ridge(hour):
@@ -183,8 +183,8 @@ def train_ridge(hour):
 
     ridge = Ridge()
     ridge.fit(train_X, train_y)
-    score=ridge.score(train_X, train_y)
-    return ridge,score
+    score = ridge.score(train_X, train_y)
+    return ridge, score
 
 
 def postprocess(hour):
@@ -206,13 +206,14 @@ def train_and_persist(model_dir=None, hour_path=None, model="xgboost"):
         hour = postprocess(hour)
 
         if model == "xgboost":
-            model_result,score = train_xgboost(hour)
+            model_result, score = train_xgboost(hour)
         else:
-            model_result,score = train_ridge(hour)
+            model_result, score = train_ridge(hour)
         model_path = get_model_path(model, model_dir)
 
         joblib.dump(model_result, model_path)
     return score
+
 
 def get_input_dict(parameters):
     hour_original = read_data()
@@ -260,7 +261,7 @@ def predict(parameters, model_dir=None, model="xgboost"):
     """
     model_path = get_model_path(model, model_dir)
     if not os.path.exists(model_path):
-        train_and_persist(model_dir)
+        train_and_persist(model_dir, model=model)
 
     model = joblib.load(model_path)
 
